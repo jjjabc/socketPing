@@ -45,7 +45,7 @@ func main() {
 }
 func heartBeat(udpConn *net.UDPConn,rAddr *net.UDPAddr,duration time.Duration) (t time.Duration,err error){
 	chap:=[]byte{0x11,0x22,0x33,0x44,0xaa,0xbb,0xcc,0xdd}
-	sn:=1
+	sn:=uint32(1)
 	diTime:=time.Now()
 	_,err=di(udpConn,rAddr,chap,sn,getState())
 	if err!=nil{
@@ -84,7 +84,7 @@ func dong(udpConn *net.UDPConn,rAddr *net.UDPAddr,chap []byte,sn uint32,timeout 
 	}
 	return getStateFromBytes(b)
 }
-func getStateFromBytes(b []byte)(state *State,error){
+func getStateFromBytes(b []byte)(state *State,err error){
 	if (b==nil){
 		return nil,errNullPointer
 	}
